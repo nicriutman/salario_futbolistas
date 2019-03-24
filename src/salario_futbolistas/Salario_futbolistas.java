@@ -44,7 +44,7 @@ public class Salario_futbolistas {
           porcentaje_individual =  map_de_json.get(i).getGoles()/map_de_niveles.get(map_de_json.get(i).getNivel());
           porcentaje_individual = porcentaje_individual*100;
           porcentaje_total = porcentaje_individual+porcentaje_grupal;
-          porcentaje_total = porcentaje_individual/2;
+          porcentaje_total = porcentaje_individual/2; 
           map_porcentajes_totales.put(map_de_json.get(i).getNombre(),porcentaje_total);
         }
         return map_porcentajes_totales;        
