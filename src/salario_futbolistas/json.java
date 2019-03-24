@@ -15,10 +15,10 @@ public class json {
     int goles;
     int sueldo;
     int bono;
-    String sueldo_completo;
+    int sueldo_completo;
     String equipo;
 
-    public json(String nombre, String nivel, int goles, int sueldo, int bono, String sueldo_completo, String equipo) {
+    public json(String nombre, String nivel, int goles, int sueldo, int bono, int sueldo_completo, String equipo) {
         this.nombre = nombre;
         this.nivel = nivel;
         this.goles = goles;
@@ -72,11 +72,11 @@ public class json {
         this.bono = bono;
     }
 
-    public String getSueldo_completo() {
+    public int getSueldo_completo() {
         return sueldo_completo;
     }
 
-    public void setSueldo_completo(String sueldo_completo) {
+    public void setSueldo_completo(int sueldo_completo) {
         this.sueldo_completo = sueldo_completo;
     }
 
