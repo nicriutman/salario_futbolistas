@@ -19,11 +19,11 @@ public class Salario_futbolistas {
     
     public static void main(String[] args) throws IOException, FileNotFoundException, ParseException {       
         HashMap<String, json> mapa_de_niveles = capturar_niveles();        
-        String ruta = ruta_de_json();
-        JSONArray  jsonarray = leer_json(ruta);
-        HashMap<String, json> map_de_json = convercion_a_map(jsonarray); 
-        HashMap<String, Double> map_porcentajes_totales = porcentage_total(map_de_json,mapa_de_niveles);        
-	HashMap<String, json> map_de_json_con_sueldo_completo = calcular_salario_completo(map_de_json,map_porcentajes_totales);
+        String ruta_del_archivo_json = ruta_de_json();
+        JSONArray  jsonarray_de_json = leer_json(ruta_del_archivo_json);
+        HashMap<String, json> mapa_de_json = convercion_a_map(jsonarray_de_json); 
+        HashMap<String, Double> mapa_porcentajes_totales = porcentage_total(mapa_de_json,mapa_de_niveles);        
+	HashMap<String, json> map_de_json_con_sueldo_completo = calcular_salario_completo(mapa_de_json,mapa_porcentajes_totales);
         mostrar_map_json_sueldo_completo(map_de_json_con_sueldo_completo);
     }  
     
@@ -73,18 +73,18 @@ public class Salario_futbolistas {
     }
     
     public static HashMap capturar_niveles(){
-        Scanner reader = new Scanner(System.in);
-        HashMap<String, Integer> map = new HashMap<String, Integer>(); 
+        Scanner captura_de_datos = new Scanner(System.in);
+        HashMap<String, Integer> mapa_de_niveles = new HashMap<String, Integer>(); 
         System.out.println("ingrese el valor de los niveles");
         System.out.println("A=");                                              
-        map.put("A",reader.nextInt());
+        mapa_de_niveles.put("A",captura_de_datos.nextInt());
         System.out.println("B=");
-        map.put("B",reader.nextInt());
+        mapa_de_niveles.put("B",captura_de_datos.nextInt());
         System.out.println("C=");        
-        map.put("C",reader.nextInt());
+        mapa_de_niveles.put("C",captura_de_datos.nextInt());
         System.out.println("Cuauh=");
-        map.put("Cuauh",reader.nextInt());
-        return map;        
+        mapa_de_niveles.put("Cuauh",captura_de_datos.nextInt());
+        return mapa_de_niveles;        
     }
     
     public static String ruta_de_json(){   
@@ -95,34 +95,20 @@ public class Salario_futbolistas {
     }
     
     public static HashMap convercion_a_map (JSONArray jsonarray) throws IOException, FileNotFoundException, ParseException{
-          JSONArray  jsonarray2 = jsonarray;
-          JSONObject obj = new JSONObject(); 
-          HashMap<Integer, json> map = new HashMap<Integer, json>(); 
-          String nombre;
-          String nivel;
-          int goles;
-          int sueldo;
-          int bono;
-          int sueldo_completo;
-          String equipo;
-           for(int i = 0;i<jsonarray2.size();i++){           
-           obj = (JSONObject) jsonarray2.get(i); 
-           nombre = (String) obj.get("nombre");
-           nivel = (String) obj.get("nivel");           
-           goles = intValue(obj.get("goles"));
-           sueldo = intValue(obj.get("sueldo"));
-           bono = intValue(obj.get("bono"));
-           sueldo_completo = intValue(obj.get("sueldo_completo"));
-           equipo = (String) obj.get("equipo");
-           map.put(i,new json(nombre,nivel,goles,sueldo,bono,sueldo_completo,equipo));            
+          JSONArray  jsonarray_a_convertir = jsonarray;
+          JSONObject objeto_json_transitorio = new JSONObject(); 
+          HashMap<Integer, json> mapa_del_json = new HashMap<Integer, json>();                     
+           for(int i = 0;i<jsonarray_a_convertir.size();i++){
+           objeto_json_transitorio = (JSONObject) jsonarray_a_convertir.get(i);
+           mapa_del_json.put(i,new json((String) objeto_json_transitorio.get("nombre"),(String) objeto_json_transitorio.get("nivel"),intValue(objeto_json_transitorio.get("goles")),intValue(objeto_json_transitorio.get("sueldo")),intValue(objeto_json_transitorio.get("bono")),intValue(objeto_json_transitorio.get("sueldo_completo")),(String) objeto_json_transitorio.get("equipo")));            
         }  
-        return map;                      
+        return mapa_del_json;                      
           }             
     
     public static JSONArray  leer_json(String ruta) throws FileNotFoundException, IOException, ParseException{
         JSONParser parser = new JSONParser();      
-	Object obj = parser.parse(new FileReader(ruta));        
-	JSONArray  jsonarray = (JSONArray ) obj;                        
+	Object objeto_json = parser.parse(new FileReader(ruta));        
+	JSONArray  jsonarray = (JSONArray ) objeto_json;                        
         return jsonarray ;            
   }
 }
