@@ -23,28 +23,50 @@ public class Salario_futbolistas {
         JSONArray  jsonarray = leer_json(ruta);
         HashMap<String, json> map_de_json = convercion_a_map(jsonarray); 
         HashMap<String, Double> map_porcentajes_totales = porcentage_total(map_de_json,mapa_de_niveles);        
-	}  
+	HashMap<String, json> map_de_json_con_sueldo_completo = calcular_salario_completo(map_de_json,map_porcentajes_totales);
+        mostrar_map_json_sueldo_completo(map_de_json_con_sueldo_completo);
+    }  
+    
+    public static void mostrar_map_json_sueldo_completo(HashMap map_de_json_con_sueldo_completo){
+        HashMap<String, json> map_de_json = map_de_json_con_sueldo_completo;
+        for(int i =0;i<map_de_json.size();i++){
+          System.out.println(map_de_json.get(i));
+        }
+    }
+    
+    public static HashMap calcular_salario_completo(HashMap map_json, HashMap map_porcentajes){
+        HashMap<String, json> map_de_json = map_json;
+        HashMap<String, Float> map_porcentaje = map_porcentajes;
+        float salario_completo;
+        for(int i =0;i<map_de_json.size();i++){
+        salario_completo = (float)(map_porcentaje.get(map_de_json.get(i).getNombre())/100);  
+        salario_completo =(float)(salario_completo*map_de_json.get(i).getBono());
+        salario_completo =(float)(salario_completo+map_de_json.get(i).getSueldo());
+        map_de_json.get(i).setSueldo_completo(salario_completo);
+        }
+        return map_de_json;        
+    }
     
     public static HashMap porcentage_total(HashMap map,HashMap map2){
         double porcentaje_grupal = 0;
         double porcentaje_individual = 0;
-        double porcentaje_total = 0;
+        float porcentaje_total = 0;
         int total_goles_individuales =0;
         int meta_de_goles=0;
         HashMap<String, json> map_de_json = map;
         HashMap<String, Integer> map_de_niveles = map2;
-        HashMap<String, Double> map_porcentajes_totales = new HashMap<String,Double>();
+        HashMap<String, Float> map_porcentajes_totales = new HashMap<String,Float>();
         for (int i =0;i<map_de_json.size();i++){
           total_goles_individuales = total_goles_individuales + map_de_json.get(i).getGoles(); 
           meta_de_goles = meta_de_goles + map_de_niveles.get(map_de_json.get(i).getNivel());          
-        }  
-        porcentaje_grupal = total_goles_individuales/meta_de_goles;
-        porcentaje_grupal = porcentaje_grupal*100;
-        for(int i =0;i<map_de_json.size();i++){
-          porcentaje_individual =  map_de_json.get(i).getGoles()/map_de_niveles.get(map_de_json.get(i).getNivel());
-          porcentaje_individual = porcentaje_individual*100;
-          porcentaje_total = porcentaje_individual+porcentaje_grupal;
-          porcentaje_total = porcentaje_individual/2; 
+        }          
+        porcentaje_grupal =(double) total_goles_individuales/meta_de_goles;
+        porcentaje_grupal =(double) porcentaje_grupal*100;        
+        for(int i =0;i<map_de_json.size();i++){            
+          porcentaje_individual =(double)  map_de_json.get(i).getGoles()/map_de_niveles.get(map_de_json.get(i).getNivel());
+          porcentaje_individual =(double)  porcentaje_individual*100;          
+          porcentaje_total = (float) (porcentaje_individual+porcentaje_grupal);          
+          porcentaje_total =(float) (porcentaje_total/2);           
           map_porcentajes_totales.put(map_de_json.get(i).getNombre(),porcentaje_total);
         }
         return map_porcentajes_totales;        

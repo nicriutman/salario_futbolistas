@@ -15,7 +15,7 @@ public class json {
     int goles;
     int sueldo;
     int bono;
-    int sueldo_completo;
+    float sueldo_completo;
     String equipo;
 
     public json(String nombre, String nivel, int goles, int sueldo, int bono, int sueldo_completo, String equipo) {
@@ -72,11 +72,11 @@ public class json {
         this.bono = bono;
     }
 
-    public int getSueldo_completo() {
+    public float getSueldo_completo() {
         return sueldo_completo;
     }
 
-    public void setSueldo_completo(int sueldo_completo) {
+    public void setSueldo_completo(float sueldo_completo) {
         this.sueldo_completo = sueldo_completo;
     }
 
