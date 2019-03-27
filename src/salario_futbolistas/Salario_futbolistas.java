@@ -22,11 +22,15 @@ public class Salario_futbolistas {
         String ruta_del_archivo_json = ruta_de_json();
         JSONArray  jsonarray_de_json = leer_json(ruta_del_archivo_json);
         HashMap<String, json> mapa_de_json = convercion_a_map(jsonarray_de_json); 
-        HashMap<String, Double> mapa_porcentajes_totales = porcentage_total(mapa_de_json,mapa_de_niveles);      
-        System.out.println("mapa_porcentajes_totales"+mapa_porcentajes_totales);
-	HashMap<String, json> map_de_json_con_sueldo_completo = calcular_salario_completo(mapa_de_json,mapa_porcentajes_totales);
-        System.out.println("map_de_json_con_sueldo_completo"+map_de_json_con_sueldo_completo);
+        HashMap<String, Double> mapa_porcentajes_totales = porcentage_total(mapa_de_json,mapa_de_niveles);              
+	HashMap<String, json> map_de_json_con_sueldo_completo = calcular_salario_completo(mapa_de_json,mapa_porcentajes_totales);        
         mostrar_map_json_sueldo_completo(map_de_json_con_sueldo_completo);
+         Scanner captura_de_datos = new Scanner(System.in);         
+         int salir=0;
+         while (salir != 1) {
+         System.out.println("escribe 1 para salir");
+         salir = captura_de_datos.nextInt();
+         }
     }  
     
     public static void mostrar_map_json_sueldo_completo(HashMap map_de_json_con_sueldo_completo){
