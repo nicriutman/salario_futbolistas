@@ -1,1 +1,0 @@
-e generado un jar desde netbeans pero aun asi me pide crear un bat para ejecutarlo, aun asi la aplicacion corre en otros computadores con el bat, abra la carpeta dist alli encontrara el archivo a ejecutar
