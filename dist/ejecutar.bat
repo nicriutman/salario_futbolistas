@@ -1,0 +1,1 @@
+java -jar salario_futbolistas.jar
