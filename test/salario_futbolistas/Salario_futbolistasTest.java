@@ -45,26 +45,5 @@ public class Salario_futbolistasTest {
      nombre_salario.put(map_de_json_con_sueldo_completo.get(i).getNombre(), map_de_json_con_sueldo_completo.get(i).getSueldo_completo());
     }
     assertTrue(esperado_map_de_json_con_sueldo_completo.equals(nombre_salario));        
-    }
-    
-    @Test
-    public void testPorcentage_total() throws IOException, FileNotFoundException, ParseException { //
-    HashMap<String, Integer> mapa_de_niveles = new HashMap<String,Integer>();
-        mapa_de_niveles.put("A",5);
-        mapa_de_niveles.put("B",10);
-        mapa_de_niveles.put("C",15);
-        mapa_de_niveles.put("Cuauh",20);
-        String ruta_del_archivo_json ="C:\\Users\\USER\\Documents\\NetBeansProjects\\salario_futbolistas\\informacion.json";
-        JSONArray  jsonarray_de_json = leer_json(ruta_del_archivo_json);
-        HashMap<String, json> mapa_de_json = convercion_a_map(jsonarray_de_json); 
-        HashMap<String, Double> mapa_porcentajes_totales = porcentage_total(mapa_de_json,mapa_de_niveles); 
-        System.out.println(mapa_porcentajes_totales);
-    HashMap<String, Double> esperado_mapa_porcentajes_totales = new HashMap<String, Double>();
-    esperado_mapa_porcentajes_totales.put("EL Cuauh", 131.0);
-    esperado_mapa_porcentajes_totales.put("Juan Perez", 89.333336);
-    esperado_mapa_porcentajes_totales.put("Cosme Fulanito", 126.0);
-    esperado_mapa_porcentajes_totales.put("El Rulo", 101.0);
-    assertTrue(esperado_mapa_porcentajes_totales.equals(mapa_porcentajes_totales));
-    }     
-    
+    }             
 }
