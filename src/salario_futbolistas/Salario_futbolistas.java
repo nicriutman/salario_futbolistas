@@ -22,15 +22,17 @@ public class Salario_futbolistas {
         String ruta_del_archivo_json = ruta_de_json();
         JSONArray  jsonarray_de_json = leer_json(ruta_del_archivo_json);
         HashMap<String, json> mapa_de_json = convercion_a_map(jsonarray_de_json); 
-        HashMap<String, Double> mapa_porcentajes_totales = porcentage_total(mapa_de_json,mapa_de_niveles);        
+        HashMap<String, Double> mapa_porcentajes_totales = porcentage_total(mapa_de_json,mapa_de_niveles);      
+        System.out.println("mapa_porcentajes_totales"+mapa_porcentajes_totales);
 	HashMap<String, json> map_de_json_con_sueldo_completo = calcular_salario_completo(mapa_de_json,mapa_porcentajes_totales);
+        System.out.println("map_de_json_con_sueldo_completo"+map_de_json_con_sueldo_completo);
         mostrar_map_json_sueldo_completo(map_de_json_con_sueldo_completo);
     }  
     
     public static void mostrar_map_json_sueldo_completo(HashMap map_de_json_con_sueldo_completo){
         HashMap<String, json> map_de_json = map_de_json_con_sueldo_completo;
         for(int i =0;i<map_de_json.size();i++){
-          System.out.println(map_de_json.get(i));
+          System.out.println(map_de_json.get(i).getNombre()+" tiene un sueldo total de = "+map_de_json.get(i).getSueldo_completo());
         }
     }
     
@@ -47,14 +49,14 @@ public class Salario_futbolistas {
         return map_de_json;        
     }
     
-    public static HashMap porcentage_total(HashMap map,HashMap map2){
+    public static HashMap porcentage_total(HashMap mapa_de_json,HashMap mapa_de_niveles){
         double porcentaje_grupal = 0;
         double porcentaje_individual = 0;
         float porcentaje_total = 0;
         int total_goles_individuales =0;
         int meta_de_goles=0;
-        HashMap<String, json> map_de_json = map;
-        HashMap<String, Integer> map_de_niveles = map2;
+        HashMap<String, json> map_de_json = mapa_de_json;
+        HashMap<String, Integer> map_de_niveles = mapa_de_niveles;
         HashMap<String, Float> map_porcentajes_totales = new HashMap<String,Float>();
         for (int i =0;i<map_de_json.size();i++){
           total_goles_individuales = total_goles_individuales + map_de_json.get(i).getGoles(); 
@@ -89,8 +91,8 @@ public class Salario_futbolistas {
     
     public static String ruta_de_json(){   
         System.out.println("copia la ruta del archivo json");
-        Scanner reader = new Scanner(System.in);
-        String ruta = reader.nextLine();
+        Scanner captura_de_datos = new Scanner(System.in);
+        String ruta = captura_de_datos.nextLine();
         return ruta;        
     }
     

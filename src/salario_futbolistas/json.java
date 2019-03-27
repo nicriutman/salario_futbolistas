@@ -18,7 +18,7 @@ public class json {
     float sueldo_completo;
     String equipo;
 
-    public json(String nombre, String nivel, int goles, int sueldo, int bono, int sueldo_completo, String equipo) {
+    public json(String nombre, String nivel, int goles, int sueldo, int bono, float sueldo_completo, String equipo) {
         this.nombre = nombre;
         this.nivel = nivel;
         this.goles = goles;
